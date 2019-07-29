@@ -13,12 +13,23 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(EnemyGenerator());
+
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator EnemyGenerator()
     {
-        
+
+        yield return new WaitForSeconds(delay);
+
+        if (active)
+        {
+            var newTransform = tranform;
+
+            Instantiate(prefabs[Random.Range(0, prefabs.Length)], new Transform.position, Quaternion.identity);
+
+        }
+        StartCoroutine(EnemyGenerator());
+
     }
-}
+
